@@ -6,13 +6,13 @@ import java.util.List;
 
 public class TextDecoding {
 
-    private final List<Character> CODE_TEXT = new ArrayList<>(Alphabet.CHARACTER_LIST);
+    private final List<Character> CODE_ALPHABET = new ArrayList<>(Alphabet.alphabet);
 
     public void decoder(String file, int key) {
-        if (key > 40){
-            key = key % 40;
+        if (key > Alphabet.alphabet.size()){
+            key = key % Alphabet.alphabet.size();
         }
-        Collections.rotate(CODE_TEXT, key);
+        Collections.rotate(CODE_ALPHABET, key);
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
              BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathForWriteDecoder(file), true))) {
@@ -25,25 +25,25 @@ public class TextDecoding {
         } catch (FileNotFoundException e) {
             System.out.println("Файла \"" + file + "\" не существует");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка чтения/записи файла");
         }
     }
 
     private char[] decryption(String text) {
 
         char[] textArrayChars = text.toLowerCase().toCharArray();
-        char[] abc = new char[textArrayChars.length];
+        char[] arrayCharsWithKeyShift = new char[textArrayChars.length];
         int temp = 0;
         for (char c : textArrayChars) {
-            if (CODE_TEXT.contains(c)) {
-                int numberChar = CODE_TEXT.indexOf(c);
-                abc[temp] = Alphabet.CHARACTER_LIST.get(numberChar);
+            if (CODE_ALPHABET.contains(c)) {
+                int numberChar = CODE_ALPHABET.indexOf(c);
+                arrayCharsWithKeyShift[temp] = Alphabet.alphabet.get(numberChar);
             } else {
-                abc[temp] = c;
+                arrayCharsWithKeyShift[temp] = c;
             }
             temp++;
         }
-        return abc;
+        return arrayCharsWithKeyShift;
     }
 
     private String pathForWriteDecoder(String path) {

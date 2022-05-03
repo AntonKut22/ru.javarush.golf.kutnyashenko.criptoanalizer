@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BruteForce {
 
-    private final List<Character> CODE_TEXT = new ArrayList<>(Alphabet.CHARACTER_LIST);
+    private final List<Character> CODE_ALPHABET = new ArrayList<>(Alphabet.alphabet);
 
     public void bruteForceDecoder(String file) {
 
@@ -28,7 +28,7 @@ public class BruteForce {
         } catch (FileNotFoundException e) {
             System.out.println("Файла \"" + file + "\" не существует");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка чтения/записи файла");
         }
     }
 
@@ -36,14 +36,14 @@ public class BruteForce {
         int key = 1;
         boolean success = false;
         while (!success) {
-            Collections.rotate(CODE_TEXT, 1);
+            Collections.rotate(CODE_ALPHABET, 1);
             char[] textArrayChars = text.toLowerCase().toCharArray();
             List<Character> keyArray = new ArrayList<>();
             int temp = 0;
             for (char c : textArrayChars) {
-                if (CODE_TEXT.contains(c)) {
-                    int numberChar = CODE_TEXT.indexOf(c);
-                    keyArray.add(temp, Alphabet.CHARACTER_LIST.get(numberChar));
+                if (CODE_ALPHABET.contains(c)) {
+                    int numberChar = CODE_ALPHABET.indexOf(c);
+                    keyArray.add(temp, Alphabet.alphabet.get(numberChar));
                 } else {
                     keyArray.add(temp, c);
                 }
