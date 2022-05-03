@@ -20,8 +20,8 @@ public class BruteForce {
             }
             int key = decryption(stringBuilder.toString());
             if (key != -1) {
-                TextDecoding textDecoding = new TextDecoding();
-                textDecoding.decoder(file, key);
+                EncodingDecoding decoding = new EncodingDecoding();
+                decoding.coderDecoder(file, key, "decoder");
             } else {
                 System.out.println("Не удалось подобрать ключ");
             }

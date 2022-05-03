@@ -28,16 +28,18 @@ public class Main {
                     filePath = scanner.nextLine();
                     System.out.println("Введите ключ");
                     key = scanner.nextInt();
-                    TextEncoding textEncoding = new TextEncoding();
-                    textEncoding.coder(filePath, key);
+                    EncodingDecoding encoding = new EncodingDecoding();
+                    encoding.coderDecoder(filePath, key, "coder");
+
                     break;
                 case 2:
                     System.out.println("Введите путь к файлу:");
                     filePath = scanner.nextLine();
                     System.out.println("Введите ключ");
                     key = scanner.nextInt();
-                    TextDecoding textDecoding = new TextDecoding();
-                    textDecoding.decoder(filePath, key);
+                    EncodingDecoding decoding = new EncodingDecoding();
+                    decoding.coderDecoder(filePath, key, "decoder");
+
                     break;
                 case 3:
                     System.out.println("Введите путь к файлу:");
