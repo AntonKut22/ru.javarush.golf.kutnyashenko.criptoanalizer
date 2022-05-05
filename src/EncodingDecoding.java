@@ -52,15 +52,14 @@ public class EncodingDecoding {
         return arrayCharsWithKeyShift;
     }
 
-    private String pathForWrite(String path, String newName) {
+    private String pathForWrite(String path, String addPostfix) {
         Path folder = Path.of(path).getParent();
-        String stringFolder = folder.toString();
         Path originalFile = Path.of(path).getFileName();
         String stringOriginalFile = originalFile.toString();
         String nameFile = stringOriginalFile.substring(0, stringOriginalFile.lastIndexOf("."));
         String typeFile = stringOriginalFile.substring(stringOriginalFile.lastIndexOf("."));
-        return stringFolder + "\\" + nameFile + "_" + newName + typeFile;
+        String newName = nameFile + "_" + addPostfix + typeFile;
+        Path newPath = folder.resolve(newName);
+        return newPath.toString();
     }
-
-
 }
